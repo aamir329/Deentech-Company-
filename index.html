@@ -3,330 +3,483 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Deentech Company | Creative & Tech Solutions</title>
+    <title>Deentech Company | Premium Creative & Tech Solutions</title>
     <style>
         :root {
-            --bg-color: #030a16;
-            --card-bg: rgba(3, 19, 38, 0.6);
-            --text-color: #ffffff;
-            --accent-cyan: #00d2ff;
+            --bg-deep: #02060e;
+            --bg-surface: rgba(6, 17, 33, 0.7);
+            --accent-cyan: #00f0ff;
             --accent-blue: #0066ff;
-            --border-glow: rgba(0, 210, 255, 0.3);
+            --text-main: #f0f5fa;
+            --text-muted: #8fa0b5;
+            --neon-glow: 0 0 20px rgba(0, 240, 255, 0.25);
+            --border-glow: 1px solid rgba(0, 240, 255, 0.15);
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            scroll-behavior: smooth;
         }
 
         body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
+            background-color: var(--bg-deep);
+            color: var(--text-main);
             overflow-x: hidden;
             background-image: 
-                radial-gradient(circle at 10% 20%, rgba(0, 102, 255, 0.15) 0%, transparent 40%),
-                radial-gradient(circle at 90% 80%, rgba(0, 210, 255, 0.1) 0%, transparent 40%);
+                radial-gradient(circle at 80% 20%, rgba(0, 102, 255, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 10% 80%, rgba(0, 240, 255, 0.08) 0%, transparent 50%);
         }
 
-        /* Header / Hero Section */
+        /* Top Navigation Bar */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 8%;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(2, 6, 14, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+        }
+
+        .nav-logo {
+            font-size: 1.2rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-logo span {
+            color: var(--accent-cyan);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: color 0.3s, text-shadow 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-cyan);
+            text-shadow: 0 0 8px var(--accent-cyan);
+        }
+
+        /* Hero / Header Section */
         header {
+            min-height: 85vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             text-align: center;
-            padding: 60px 20px 40px;
+            padding: 120px 20px 60px;
             position: relative;
         }
 
-        .logo-container {
-            margin-bottom: 20px;
-        }
-
-        /* Futuristic Hexagon Logo Placeholder */
-        .hex-logo {
-            width: 100px;
-            height: 100px;
-            margin: 0 auto;
+        /* Custom Pure CSS Replication of your Hex Circuit Logo */
+        .logo-box {
             position: relative;
-            background: radial-gradient(circle, rgba(0,210,255,0.2) 0%, transparent 70%);
+            width: 140px;
+            height: 140px;
+            margin-bottom: 30px;
             display: flex;
             align-items: center;
             justify-content: center;
-            filter: drop-shadow(0 0 15px var(--accent-cyan));
+            animation: float 4s ease-in-out infinite;
         }
-        
-        .hex-logo::before {
+
+        .hex-outer {
+            position: absolute;
+            width: 120px;
+            height: 104px;
+            background: transparent;
+            border-left: 4px solid var(--accent-cyan);
+            border-right: 4px solid var(--accent-cyan);
+            box-shadow: var(--neon-glow);
+        }
+
+        .hex-outer::before, .hex-outer::after {
             content: "";
             position: absolute;
+            width: 85px;
+            height: 85px;
+            border-radius: 4px;
+            border: 4px solid var(--accent-cyan);
+            border-left: 0;
+            border-bottom: 0;
+            transform: scaleY(0.5774) rotate(-45deg);
+            left: 14px;
+        }
+
+        .hex-outer::before { top: -45px; }
+        .hex-outer::after { bottom: -45px; border-top: 0; border-right: 0; border-bottom: 4px solid var(--accent-cyan); border-left: 4px solid var(--accent-cyan); }
+
+        .hex-inner {
+            position: absolute;
             width: 70px;
-            height: 70px;
-            border: 3px solid var(--accent-cyan);
-            border-radius: 15px;
-            transform: rotate(45deg);
+            height: 60px;
+            border-left: 3px solid rgba(0, 240, 255, 0.6);
+            border-right: 3px solid rgba(0, 240, 255, 0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .circuit-dot {
+            width: 8px;
+            height: 8px;
+            background: #fff;
+            border-radius: 50%;
+            box-shadow: 0 0 12px #fff, 0 0 20px var(--accent-cyan);
         }
 
         h1 {
-            font-size: 3rem;
-            letter-spacing: 4px;
-            font-weight: 700;
+            font-size: 4rem;
+            letter-spacing: 8px;
+            font-weight: 800;
             text-transform: uppercase;
-            margin-bottom: 5px;
-            background: linear-gradient(to bottom, #ffffff 60%, #b0c4de);
+            margin-bottom: 0px;
+            background: linear-gradient(to bottom, #ffffff 40%, #a4b3c6);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        .subtitle {
-            font-size: 1.5rem;
+        .company-title {
+            font-size: 2rem;
             color: var(--accent-cyan);
-            letter-spacing: 6px;
+            letter-spacing: 12px;
             text-transform: uppercase;
-            font-weight: 600;
-            margin-bottom: 15px;
-            text-shadow: 0 0 10px rgba(0, 210, 255, 0.5);
+            font-weight: 500;
+            margin-top: 5px;
+            margin-bottom: 25px;
+            text-shadow: 0 0 15px rgba(0, 240, 255, 0.4);
         }
 
         .tagline {
-            font-size: 1rem;
-            letter-spacing: 4px;
+            font-size: 1.1rem;
+            letter-spacing: 6px;
             text-transform: uppercase;
-            color: #8fa0b5;
+            color: var(--text-muted);
+            font-weight: 400;
         }
 
-        /* Services Grid Section */
-        .services-container {
-            max-width: 1200px;
-            margin: 40px auto;
-            padding: 0 20px;
+        /* Services Section Layout */
+        .services-section {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 80px 4% 120px;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-header h2 {
+            font-size: 2rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+        }
+
+        .section-header ::after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 2px;
+            background: var(--accent-cyan);
+            margin: 15px auto 0;
+            box-shadow: 0 0 8px var(--accent-cyan);
         }
 
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 30px;
         }
 
+        /* Professional Premium Cards */
         .card {
-            background: var(--card-bg);
-            border: 1px solid var(--border-glow);
-            border-radius: 12px;
-            padding: 35px 30px;
-            transition: all 0.4s ease;
+            background: var(--bg-surface);
+            border: var(--border-glow);
+            border-radius: 16px;
+            padding: 40px;
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            backdrop-filter: blur(16px);
             position: relative;
-            overflow: hidden;
-            backdrop-filter: blur(10px);
-        }
-
-        .card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, transparent, rgba(0, 210, 255, 0.05), transparent);
-            transform: translateX(-100%);
-            transition: 0.6s;
-        }
-
-        .card:hover::before {
-            transform: translateX(100%);
         }
 
         .card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-8px);
             border-color: var(--accent-cyan);
-            box-shadow: 0 0 20px rgba(0, 210, 255, 0.2);
+            box-shadow: var(--neon-glow);
         }
 
         .card-header {
             display: flex;
             align-items: center;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
+        }
+
+        .icon-wrapper {
+            background: rgba(0, 240, 255, 0.06);
+            border: 1px solid rgba(0, 240, 255, 0.2);
+            width: 55px;
+            height: 55px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 20px;
+            transition: background 0.3s;
+        }
+
+        .card:hover .icon-wrapper {
+            background: rgba(0, 240, 255, 0.15);
+            border-color: var(--accent-cyan);
         }
 
         .icon {
-            width: 40px;
-            height: 40px;
-            margin-right: 15px;
+            width: 26px;
+            height: 26px;
             fill: var(--accent-cyan);
-            filter: drop-shadow(0 0 5px var(--accent-cyan));
+            filter: drop-shadow(0 0 4px var(--accent-cyan));
         }
 
         .card h3 {
-            font-size: 1.3rem;
+            font-size: 1.25rem;
             letter-spacing: 2px;
             text-transform: uppercase;
-            color: #ffffff;
+            font-weight: 600;
         }
 
         .card p {
-            color: #a4b3c6;
-            line-height: 1.6;
-            font-size: 1rem;
+            color: var(--text-muted);
+            line-height: 1.7;
+            font-size: 0.98rem;
         }
 
-        /* Footer / Contact Section */
+        /* Footer & Corporate Identity */
         footer {
-            max-width: 1200px;
-            margin: 60px auto 40px;
-            padding: 40px 20px;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            background: #010307;
+            border-top: 1px solid rgba(255, 255, 255, 0.03);
+            padding: 60px 8%;
             display: flex;
             flex-wrap: wrap;
             justify-content: space-between;
             align-items: center;
-            gap: 30px;
+            gap: 40px;
         }
 
-        .contact-info {
+        .footer-brand h4 {
+            font-size: 1.4rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .footer-brand p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .contact-panel {
             display: flex;
             flex-direction: column;
             gap: 15px;
         }
 
-        .contact-item {
+        .contact-link {
             display: flex;
             align-items: center;
-            color: #a4b3c6;
+            color: var(--text-muted);
             text-decoration: none;
+            font-size: 0.95rem;
             transition: color 0.3s;
-            font-size: 1rem;
         }
 
-        .contact-item:hover {
+        .contact-link:hover {
             color: var(--accent-cyan);
         }
 
         .contact-icon {
-            width: 20px;
-            height: 20px;
+            width: 18px;
+            height: 18px;
             margin-right: 15px;
             fill: var(--accent-cyan);
         }
 
-        .qr-code-box {
-            background: white;
-            padding: 10px;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 0 15px rgba(0, 210, 255, 0.2);
+        .qr-wrapper {
+            background: #fff;
+            padding: 12px;
+            border-radius: 12px;
+            box-shadow: var(--neon-glow);
+            display: inline-block;
         }
 
-        /* Responsive Tweaks */
-        @media (max-width: 768px) {
-            h1 { font-size: 2.2rem; }
-            .subtitle { font-size: 1.2rem; }
-            footer {
-                flex-direction: column;
-                text-align: center;
-            }
-            .contact-item {
-                justify-content: center;
-            }
+        /* Floating Animation */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* Responsive UI Scaling */
+        @media (max-width: 900px) {
+            h1 { font-size: 2.8rem; }
+            .company-title { font-size: 1.5rem; letter-spacing: 8px; }
+            .nav-links { display: none; } /* Mobile menus can collapse here */
+            footer { flex-direction: column; text-align: center; }
+            .contact-link { justify-content: center; }
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <div class="logo-container">
-            <div class="hex-logo"></div>
+    <nav>
+        <div class="nav-logo">Deentech <span>//</span></div>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#services">Capabilities</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <header id="home">
+        <div class="logo-box">
+            <div class="hex-outer"></div>
+            <div class="hex-inner">
+                <div class="circuit-dot"></div>
+            </div>
         </div>
         <h1>Deentech</h1>
-        <div class="subtitle">Company</div>
+        <div class="company-title">Company</div>
         <div class="tagline">Creative & Tech Solutions</div>
     </header>
 
-    <main class="services-container">
+    <section class="services-section" id="services">
+        <div class="section-header">
+            <h2>Our Enterprise Capabilities</h2>
+        </div>
+        
         <div class="grid">
             
             <div class="card">
                 <div class="card-header">
-                    <svg class="icon" viewBox="0 0 24 24"><path d="M4 4h3l2-2h6l2 2h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2m8 3a5 5 0 0 0-5 5 5 5 0 0 0 5 5 5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 2a3 3 0 0 1 3 3 3 3 0 0 1-3 3 3 3 0 0 1-3-3 3 3 0 0 1 3-3z"/></svg>
+                    <div class="icon-wrapper">
+                        <svg class="icon" viewBox="0 0 24 24"><path d="M4 4h3l2-2h6l2 2h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2m8 3a5 5 0 0 0-5 5 5 5 0 0 0 5 5 5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 2a3 3 0 0 1 3 3 3 3 0 0 1-3 3 3 3 0 0 1-3-3 3 3 0 0 1 3-3z"/></svg>
+                    </div>
                     <h3>Photography</h3>
                 </div>
-                <p>We capture stunning moments and create visual stories that make a lasting impact.</p>
+                <p>We capture stunning moments and create visual stories that make a lasting professional impact.</p>
             </div>
 
             <div class="card">
                 <div class="card-header">
-                    <svg class="icon" viewBox="0 0 24 24"><path d="M16.36 14c.08-.66.14-1.32.14-2s-.06-1.34-.14-2h3.38c.16.64.26 1.31.26 2s-.1 1.36-.26 2m-5.17 7.24c.86-1.68 1.4-3.58 1.63-5.24h3.44c-.61 2.14-1.85 4-3.44 5.24m-1.63 0c-1.6 1.24-2.83 3.1-3.44 5.24h3.44c.23-1.66.77-3.56 1.63-5.24M2 12c0-3.31 2.69-6 6-6h8c3.31 0 6 2.69 6 6s-2.69 6-6 6H8c-3.31 0-6-2.69-6-6z"/></svg>
+                    <div class="icon-wrapper">
+                        <svg class="icon" viewBox="0 0 24 24"><path d="M16.36 14c.08-.66.14-1.32.14-2s-.06-1.34-.14-2h3.38c.16.64.26 1.31.26 2s-.1 1.36-.26 2m-5.17 7.24c.86-1.68 1.4-3.58 1.63-5.24h3.44c-.61 2.14-1.85 4-3.44 5.24m-1.63 0c-1.6 1.24-2.83 3.1-3.44 5.24h3.44c.23-1.66.77-3.56 1.63-5.24M2 12c0-3.31 2.69-6 6-6h8c3.31 0 6 2.69 6 6s-2.69 6-6 6H8c-3.31 0-6-2.69-6-6z"/></svg>
+                    </div>
                     <h3>Web Development</h3>
                 </div>
-                <p>We build responsive, modern, and user-friendly websites tailored to your business needs.</p>
+                <p>We build responsive, cutting-edge, and user-centric web applications tailored exactly to modern enterprise standards.</p>
             </div>
 
             <div class="card">
                 <div class="card-header">
-                    <svg class="icon" viewBox="0 0 24 24"><path d="M18 4l2 4h-3l-2-4h-2l2 4h-3l-2-4H8l2 4H7L5 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V4h-4M10 15.5v-5l4.5 2.5-4.5 2.5z"/></svg>
+                    <div class="icon-wrapper">
+                        <svg class="icon" viewBox="0 0 24 24"><path d="M18 4l2 4h-3l-2-4h-2l2 4h-3l-2-4H8l2 4H7L5 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V4h-4M10 15.5v-5l4.5 2.5-4.5 2.5z"/></svg>
+                    </div>
                     <h3>Video Editing</h3>
                 </div>
-                <p>We edit and enhance videos to deliver high-quality content that engages your audience.</p>
+                <p>We process, cut, and enhance cinematic video formats to deliver elite media assets that thoroughly engage targeted audiences.</p>
             </div>
 
             <div class="card">
                 <div class="card-header">
-                    <svg class="icon" viewBox="0 0 24 24"><path d="M21 2H3c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h7l-2 3v1h8v-1l-2-3h7c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2m0 14H3V4h18v12M8 6.82v10.36c0 .79.87 1.27 1.54.84l8.14-5.18a1 1 0 0 0 0-1.69L9.54 5.98A1 1 0 0 0 8 6.82z"/></svg>
+                    <div class="icon-wrapper">
+                        <svg class="icon" viewBox="0 0 24 24"><path d="M21 2H3c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h7l-2 3v1h8v-1l-2-3h7c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2m0 14H3V4h18v12M8 6.82v10.36c0 .79.87 1.27 1.54.84l8.14-5.18a1 1 0 0 0 0-1.69L9.54 5.98A1 1 0 0 0 8 6.82z"/></svg>
+                    </div>
                     <h3>Video Design</h3>
                 </div>
-                <p>We create professional videos and motion graphics that bring your ideas to life.</p>
+                <p>Advanced creation of professional motion graphics, production design, and stylized visual conceptualizations.</p>
             </div>
 
             <div class="card">
                 <div class="card-header">
-                    <svg class="icon" viewBox="0 0 24 24"><path d="M17.41 6.59L15 4.17c-.41-.41-1.02-.17-1.02.4V7H3c-.55 0-1 .45-1 1v8c0 .55.45 1 1 1h11v2.43c0 .57.61.81 1.02.4l2.42-2.42c.78-.78.78-2.05 0-2.83l-2.42-2.42c-.41-.41-1.02-.17-1.02.4V13H4V9h10v2.43c0 .57.61.81 1.02.4l2.42-2.42c.76-.78.76-2.05-.03-2.82z"/></svg>
+                    <div class="icon-wrapper">
+                        <svg class="icon" viewBox="0 0 24 24"><path d="M12 2A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2zm1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L11 15v2c0 1.1.9 2 2 2v.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H9v-2h2c.55 0 1-.45 1-1V7h2c1.66 0 3-1.34 3-3 .55.43 1.05.93 1.46 1.48L16 7.5v1.5c0 1.1-.9 2-2 2h-1v2h3c1.1 0 2 .9 2 2v1.1c.74-.5 1.38-1.15 1.9-1.92z"/></svg>
+                    </div>
                     <h3>Graphic Design</h3>
                 </div>
-                <p>We craft compelling brand identities, layouts, and visual assets that elevate your market presence.</p>
+                <p>We design powerful modern brand identities, marketing layouts, dynamic corporate flyers, and premium digital interface profiles.</p>
             </div>
 
             <div class="card">
                 <div class="card-header">
-                    <svg class="icon" viewBox="0 0 24 24"><path d="M17 1H7c-1.1 0-2 .9-2 2v18c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V3c0-1.1-.9-2-2-2m0 18H7V5h10v14M12 6c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4z"/></svg>
+                    <div class="icon-wrapper">
+                        <svg class="icon" viewBox="0 0 24 24"><path d="M17 1H7c-1.1 0-2 .9-2 2v18c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V3c0-1.1-.9-2-2-2m0 18H7V5h10v14M12 6c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4z"/></svg>
+                    </div>
                     <h3>App Development</h3>
                 </div>
-                <p>We build custom mobile applications that are fast, reliable, and easy to use.</p>
+                <p>Engineered design of specialized native mobile applications focused entirely on scalable architectures and lightning-fast speeds.</p>
             </div>
 
             <div class="card">
                 <div class="card-header">
-                    <svg class="icon" viewBox="0 0 24 24"><path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3m0 13c-2.6 0-4.9-1.2-6.4-3.1C6.3 14.6 9 15.5 12 15.5c3 0 5.7-.9 6.4-2.6-1.5 1.9-3.8 3.1-6.4 3.1z"/></svg>
+                    <div class="icon-wrapper">
+                        <svg class="icon" viewBox="0 0 24 24"><path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3m0 13c-2.6 0-4.9-1.2-6.4-3.1C6.3 14.6 9 15.5 12 15.5c3 0 5.7-.9 6.4-2.6-1.5 1.9-3.8 3.1-6.4 3.1z"/></svg>
+                    </div>
                     <h3>Software Training</h3>
                 </div>
-                <p>We provide practical training to help you build skills and grow your career.</p>
+                <p>Industry-grade technical training programs structured perfectly to empower next-generation engineers and career switchers.</p>
             </div>
 
         </div>
-    </main>
+    </section>
 
-    <footer>
-        <div class="contact-info">
-            <a href="mailto:deentechcompany@gmail.com" class="contact-item">
+    <footer id="contact">
+        <div class="footer-brand">
+            <h4>Deentech Company</h4>
+            <p>© 2026 Enterprise Innovation Systems. All rights reserved.</p>
+        </div>
+
+        <div class="contact-panel">
+            <a href="mailto:deentechcompany@gmail.com" class="contact-link">
                 <svg class="contact-icon" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
                 deentechcompany@gmail.com
             </a>
-            <a href="http://www.deentechcompany.com" target="_blank" class="contact-item">
+            <a href="http://www.deentechcompany.com" target="_blank" class="contact-link">
                 <svg class="contact-icon" viewBox="0 0 24 24"><path d="M16.36 14c.08-.66.14-1.32.14-2s-.06-1.34-.14-2h3.38c.16.64.26 1.31.26 2s-.1 1.36-.26 2m-5.17 7.24c.86-1.68 1.4-3.58 1.63-5.24h3.44c-.61 2.14-1.85 4-3.44 5.24m-1.63 0c-1.6 1.24-2.83 3.1-3.44 5.24h3.44c.23-1.66.77-3.56 1.63-5.24M2 12c0-3.31 2.69-6 6-6h8c3.31 0 6 2.69 6 6s-2.69 6-6 6H8c-3.31 0-6-2.69-6-6z"/></svg>
                 www.deentechcompany.com
             </a>
-            <a href="tel:+2347064216461" class="contact-item">
+            <a href="tel:+2347064216461" class="contact-link">
                 <svg class="contact-icon" viewBox="0 0 24 24"><path d="M6.62 10.79a15.15 15.15 0 0 0 6.59 6.59l2.2-2.2c.28-.28.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.24.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
                 +234 706 421 6461
             </a>
-            <a href="tel:09139189579" class="contact-item">
-                <svg class="contact-icon" viewBox="0 0 24 24"><path d="M6.62 10.79a15.15 15.15 0 0 0 6.59 6.59l2.2-2.2c.28-.28.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.24.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
-                09139189579
-            </a>
-            <a href="tel:+2349062701522" class="contact-item">
-                <svg class="contact-icon" viewBox="0 0 24 24"><path d="M6.62 10.79a15.15 15.15 0 0 0 6.59 6.59l2.2-2.2c.28-.28.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.24.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
-                +234 906 270 1522
-            </a>
         </div>
 
-        <div class="qr-code-box">
-            <svg width="100" height="100" viewBox="0 0 24 24" fill="#030a16">
+        <div class="qr-wrapper">
+            <svg width="80" height="80" viewBox="0 0 24 24" fill="#02060e">
                 <path d="M3 3h6v6H3V3zm2 2v2h2V5H5zm8-2h6v6h-6V3zm2 2v2h2V5h-2zM3 15h6v6H3v-6zm2 2v2h2v-2H5zm10 2h2v2h-2v-2zm2-2h2v2h-2v-2zm-2-2h2v2h-2v-2zm2 0h2v2h-2v-2zm2-2h2v2h-2v-2zm-4 0h2v2h-2v-2zm2-2h2v2h-2V9zm-2 2h2v2h-2v-2zm-4-4h2v2h-2V7zm0 4h2v2h-2v-2z"/>
             </svg>
         </div>
